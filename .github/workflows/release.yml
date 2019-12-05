@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: install build-essential
-      run: sudo apt-get install -y build-essential
+      run: sudo apt-get update; sudo apt-get install -y build-essential
     - name: install all pre-reqs
       run: sudo make -f package/Makefile.ubuntu install_prerequisites
     - name: build packages
@@ -32,7 +32,9 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: install build-essential
-      run: sudo apt-get install -y build-essential
+      run: sudo apt-get update; sudo apt-get install -y build-essential
+    - name: install tinyxml from source
+      run: cd /tmp; git clone https://github.com/leethomason/tinyxml2; cd tinyxml2; make; sudo make install
     - name: install all pre-reqs
       run: sudo make -f package/Makefile.ubuntu install_prerequisites
     - name: build packages
